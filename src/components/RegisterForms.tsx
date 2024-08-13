@@ -1,13 +1,21 @@
 import React from "react";
+import { useState } from "react";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { RegisterFormValues } from "../Models/FormValues";
+import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import DatePicker, {
+  DayValue,
+  DayRange,
+  Day,
+} from "react-modern-calendar-datepicker";
 
-interface LoginFormProps {
+interface RegisterFormProps {
   onSubmit: (values: RegisterFormValues) => void;
 }
 
-const RegisterForms: React.FC<LoginFormProps> = ({ onSubmit }) => {
+const RegisterForms: React.FC<RegisterFormProps> = ({ onSubmit }) => {
+  const [day, setDay] = React.useState<DayValue>(null);
   const initialValues: RegisterFormValues = {
     fullName: "",
     email: "",
@@ -48,6 +56,7 @@ const RegisterForms: React.FC<LoginFormProps> = ({ onSubmit }) => {
           onSubmit(values);
           setSubmitting(false);
         }, 400);
+        console.log(values);
       }}
     >
       {({ isSubmitting }) => (
@@ -97,12 +106,14 @@ const RegisterForms: React.FC<LoginFormProps> = ({ onSubmit }) => {
             >
               Date Of Birth
             </label>
-            <Field
+            {/* <Field
               id="dateOfBirth"
               name="dateOfBirth"
               type="text"
               className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            />
+            /> */}
+            <DatePicker value={day} onChange={setDay} />
+
             <ErrorMessage
               name="dateOfBirth"
               component="div"

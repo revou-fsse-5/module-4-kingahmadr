@@ -2,6 +2,7 @@ import * as React from "react";
 import logo from "../assets/images/Login.png";
 import RegisterForms from "../components/RegisterForms";
 
+// import DatePickerForms from "../components/DatePickerForms";
 const RegisterPages: React.FC = () => {
   const handleSubmit = (values: {
     fullName: string;

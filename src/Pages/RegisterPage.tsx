@@ -1,5 +1,5 @@
 import * as React from "react";
-import logo from "../assets/images/Login.png";
+import logo from "../assets/images/Register.png";
 import RegisterForms from "../components/RegisterForms";
 
 // import DatePickerForms from "../components/DatePickerForms";

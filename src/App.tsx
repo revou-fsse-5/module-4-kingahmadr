@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPages from "./Pages/LoginPages";
 import RegisterPages from "./Pages/RegisterPage";
+import CumulativeDataForms from "./components/CumulativeDataForms";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPages />}></Route>
           <Route path="/login" element={<LoginPages />}></Route>
-          <Route path="/register" element={<RegisterPages />}></Route>
+          {/* <Route path="/register" element={<CumulativeDataForms />}></Route> */}
         </Routes>
       </BrowserRouter>
     </>

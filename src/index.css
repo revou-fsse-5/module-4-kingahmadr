@@ -9,8 +9,10 @@
   }
 
   .login-page,
-  .register-page {
+  .register-page,
+  body {
     min-height: 100vh;
+
     background: linear-gradient(
         to top left,
         rgba(122, 139, 207, 0.8) 0%,

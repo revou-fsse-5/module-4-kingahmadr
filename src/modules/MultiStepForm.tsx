@@ -21,14 +21,14 @@ const MultiStepForm: React.FC = () => {
     zipCode: 0,
   };
   const StepOneSchema = Yup.object().shape({
-    fullname: Yup.string().required("First name is required"),
+    fullname: Yup.string().required("Fullname is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
-    dateOfBirth: Yup.string().required("Required"),
+    dateOfBirth: Yup.string().required("date of birth of birth"),
   });
 
   const StepTwoSchema = Yup.object().shape({
     streetAddress: Yup.string().required("Address is reqiured"),
-    city: Yup.string().required("Address is reqiured"),
+    city: Yup.string().required("City is reqiured"),
     zipCode: Yup.number().required("Address is reqiured"),
   });
 

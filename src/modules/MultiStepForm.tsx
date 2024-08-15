@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
-
-import * as Yup from "yup";
-import PersonalRegistrationForms from "../components/PersonalForms";
-import AddressInformationForms from "../components/AddressForms";
-import AccountInformationForms from "../components/AccountForms";
 import StepIndicator from "../components/StepIndicator";
+import SwitchCaseStep from "../components/SwitchCaseStep";
+import { StepOneSchema, StepTwoSchema, StepThreeSchema } from "./Scheme";
 
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -20,41 +17,15 @@ const MultiStepForm: React.FC = () => {
     password: "",
     zipCode: 0,
   };
-  const StepOneSchema = Yup.object().shape({
-    fullname: Yup.string().required("Fullname is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    dateOfBirth: Yup.string().required("date of birth of birth"),
-  });
-
-  const StepTwoSchema = Yup.object().shape({
-    streetAddress: Yup.string().required("Address is reqiured"),
-    city: Yup.string().required("City is reqiured"),
-    zipCode: Yup.number().required("Address is reqiured"),
-  });
-
-  const StepThreeSchema = Yup.object().shape({
-    username: Yup.string().required("Username is required"),
-    password: Yup.string()
-      .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()]).{8,20}\S$/)
-      .min(6, "Password must be at least 6 characters")
-      .required(
-        "Please valid password. One uppercase, one lowercase, one special character and no spaces"
-      ),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), undefined], "Passwords must match")
-      .required("Required"),
-  });
   const validationSchema = [StepOneSchema, StepTwoSchema, StepThreeSchema];
 
   const handleNext = () => {
     setStep(step + 1);
-    // setIsActive(true);
     console.log(step);
   };
 
   const handlePrevious = () => {
     setStep(step - 1);
-    // setIsActive(true);
     console.log(step);
   };
 
@@ -89,14 +60,10 @@ const MultiStepForm: React.FC = () => {
       {({ isValid }) => (
         <section className="flex flex-col justify-center">
           <div className="mt-20 self-center">
-            {<StepIndicator step={step} />}
+            <StepIndicator step={step} />
           </div>
           <Form className="relative flex flex-col mx-auto mt-10 w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
-            {step === 1 && <PersonalRegistrationForms />}
-
-            {step === 2 && <AddressInformationForms />}
-
-            {step === 3 && <AccountInformationForms />}
+            <SwitchCaseStep index={step} />
 
             <div className="mx-auto flex gap-4">
               {step > 1 && (

@@ -4,7 +4,6 @@ const PersonalRegistrationForms = () => {
   return (
     <section className="space-y-6 p-5 mx-auto max-w-md">
       <h3 className="absolute left-5 top-5"> Personal Registration </h3>
-      {/* <Form className="space-y-6 p-5 mx-auto max-w-md"> */}
       <div>
         <label
           htmlFor="fullname"

@@ -1,4 +1,3 @@
-import React from "react";
 import MultiStepForm from "./Modules/MultiStepForm";
 
 function App() {

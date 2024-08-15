@@ -1,26 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import PersonalRegistrationForms from "../components/PersonalRegistrationForms";
-import AddressInformationForms from "../components/AddressInformationForms";
-import AccountInformationForms from "../components/AccountInformationForms";
+import React, { useState } from "react";
+import { Formik, Form } from "formik";
 
 import * as Yup from "yup";
+import PersonalRegistrationForms from "../components/PersonalForms";
+import AddressInformationForms from "../components/AddressForms";
+import AccountInformationForms from "../components/AccountForms";
+import StepIndicator from "../components/StepIndicator";
 
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState(1);
-  const titleList = [
-    "Personal Information",
-    "Address Information",
-    "Account Information",
-  ];
-  // // const [currentTitle, setCurrentTitle] = useState();
-  // const setTitle = (i: number) => {
-  //   const currentTitle = titleList[i];
-  //   // document.title = currentTitle;
-  // };
-  // useEffect(() => {
-  //   setTitle(step - 1);  // Update title based on the current step
-  // }, [step]);
+
   const initialValues = {
     fullname: "",
     username: "",
@@ -56,14 +45,17 @@ const MultiStepForm: React.FC = () => {
       .required("Required"),
   });
   const validationSchema = [StepOneSchema, StepTwoSchema, StepThreeSchema];
-  // const [StepOneSchema, StepTwoSchema, StepThreeSchema] = ValidationSchema
 
   const handleNext = () => {
     setStep(step + 1);
+    // setIsActive(true);
+    console.log(step);
   };
 
   const handlePrevious = () => {
     setStep(step - 1);
+    // setIsActive(true);
+    console.log(step);
   };
 
   const handleSubmit = (values: typeof initialValues) => {
@@ -89,53 +81,22 @@ const MultiStepForm: React.FC = () => {
       onSubmit={(values) => {
         if (step === validationSchema.length) {
           handleSubmit(values);
-          console.log(handleSubmit);
         } else {
           handleNext();
         }
       }}
     >
       {({ isValid }) => (
-        <section>
-          {/* <h3>
-            {step === 1 && titleList[0]}
-            {step === 2 && titleList[1]}
-            {step === 3 && titleList[2]}
-          </h3> */}
-          <Form className="relative flex flex-col mx-auto mt-20 w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
-            {step === 1 && (
-              // <div>
-              //   <Field name="firstName" placeholder="First Name" />
-              //   <ErrorMessage name="firstName" component="div" />
+        <section className="flex flex-col justify-center">
+          <div className="mt-20 self-center">
+            {<StepIndicator step={step} />}
+          </div>
+          <Form className="relative flex flex-col mx-auto mt-10 w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
+            {step === 1 && <PersonalRegistrationForms />}
 
-              //   <Field name="lastName" placeholder="Last Name" />
-              //   <ErrorMessage name="lastName" component="div" />
-              // </div>
+            {step === 2 && <AddressInformationForms />}
 
-              <PersonalRegistrationForms />
-            )}
-
-            {step === 2 && (
-              // <div>
-              //   <Field name="email" placeholder="Email" />
-              //   <ErrorMessage name="email" component="div" />
-
-              //   <Field name="phone" placeholder="Phone" />
-              //   <ErrorMessage name="phone" component="div" />
-              // </div>
-              <AddressInformationForms />
-            )}
-
-            {step === 3 && (
-              // <div>
-              //   <Field name="streetAddress" placeholder="streetAddress" />
-              //   <ErrorMessage name="streetAddress" component="div" />
-
-              //   <Field name="city" placeholder="City" />
-              //   <ErrorMessage name="city" component="div" />
-              // </div>
-              <AccountInformationForms />
-            )}
+            {step === 3 && <AccountInformationForms />}
 
             <div className="mx-auto flex gap-4">
               {step > 1 && (

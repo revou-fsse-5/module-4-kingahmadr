@@ -1,51 +1,11 @@
 import React from "react";
-import { useState } from "react";
-import * as Yup from "yup";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { AddressFormValues } from "../Models/FormValues";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Field, ErrorMessage } from "formik";
 
-type AddressFormProps = AddressFormValues & {
-  updateFields: (fields: Partial<AddressFormValues>) => void;
-};
-
-// const AddressInformationForms: React.FC<AddressFormProps> = ({
-const AddressInformationForms: React.FC = (
-  {
-    // streetAddress,
-    // city,
-    // zipCode,
-    // updateFields,
-  }
-) => {
-  // const initialValues: AddressFormValues = {
-  //   streetAddress: "",
-  //   city: "",
-  //   zipCode: 0,
-  // };
-
-  // const validationSchema = Yup.object().shape({
-  //   streetAddress: Yup.string().required("Please enter your Street Address"),
-  //   city: Yup.string().required("Required"),
-  //   zipCode: Yup.number().required("Please enter your Zip Code"),
-  // });
-
+const AddressInformationForms: React.FC = () => {
   return (
-    // <Formik
-    //   initialValues={initialValues}
-    //   validationSchema={validationSchema}
-    //   onSubmit={(values, { setSubmitting }) => {
-    //     setTimeout((): void => {
-    //       //   onSubmit(values);
-    //       setSubmitting(false);
-    //     }, 400);
-    //     console.log(values);
-    //   }}
-    // >
-    //   {/* {({ isSubmitting }) => ( */}
     <section className="space-y-6 p-5 mx-auto max-w-md">
       <h3 className="absolute left-5 top-5"> Address Information </h3>
-      {/* <Form className="space-y-6 p-5 mx-auto max-w-md"> */}
+
       <div>
         <label
           htmlFor="streetAddress"
@@ -105,17 +65,6 @@ const AddressInformationForms: React.FC = (
           className="text-red-500 text-sm mt-1"
         />
       </div>
-      {/* <div className="flex w-full justify-between">
-            <button
-              type="submit"
-              className="w-32 px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Next
-            </button>
-          </div> */}
-      {/* </Form> */}
-      {/* )} 
-       </Formik> */}
     </section>
   );
 };

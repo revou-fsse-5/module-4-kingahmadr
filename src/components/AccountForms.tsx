@@ -1,89 +1,72 @@
 import React from "react";
-import { useState } from "react";
-import * as Yup from "yup";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { PersonalFormValues } from "../Models/FormValues";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Field, ErrorMessage } from "formik";
 
-type PersonalFormProps = PersonalFormValues & {
-  updateFields: (fields: Partial<PersonalFormValues>) => void;
-};
-
-const PersonalRegistrationForms = ({}) => {
+const AccountInformationForms: React.FC = () => {
   return (
     <section className="space-y-6 p-5 mx-auto max-w-md">
-      <h3 className="absolute left-5 top-5"> Personal Registration </h3>
+      <h3 className="absolute left-5 top-5">Account Information</h3>
       {/* <Form className="space-y-6 p-5 mx-auto max-w-md"> */}
       <div>
         <label
-          htmlFor="fullname"
+          htmlFor="username"
           className="block text-sm font-medium text-gray-800"
         >
-          Fullname
+          Username
         </label>
         <Field
-          id="fullname"
-          name="fullname"
+          id="username"
+          name="username"
           type="text"
           className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         <ErrorMessage
-          name="fullname"
+          name="username"
           component="div"
           className="text-red-500 text-sm mt-1"
         />
       </div>
       <div>
         <label
-          htmlFor="email"
+          htmlFor="password"
           className="block text-sm font-medium text-gray-800"
         >
-          email
+          Password
         </label>
         <Field
-          id="email"
-          name="email"
-          type="email"
+          id="password"
+          name="password"
+          type="password"
           className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         <ErrorMessage
-          name="email"
+          name="password"
           component="div"
           className="text-red-500 text-sm mt-1"
         />
       </div>
       <div>
         <label
-          htmlFor="dateOfBirth"
+          htmlFor="confirmPassword"
           className="block text-sm font-medium text-gray-800"
         >
-          Date Of Birth
+          Confirm Password
         </label>
         <Field
-          id="dateOfBirth"
-          name="dateOfBirth"
-          type="text"
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
           className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         {/* <DatePicker value={day} onChange={setDay} /> */}
 
         <ErrorMessage
-          name="dateOfBirth"
+          name="confirmPassword"
           component="div"
           className="text-red-500 text-sm mt-1"
         />
       </div>
-      {/* <div className="flex w-full justify-between">
-          <button
-            type="submit"
-            className="w-32 px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Next
-          </button>
-        </div> */}
-      {/* </Form> */}
     </section>
   );
 };
 
-export default PersonalRegistrationForms;
+export default AccountInformationForms;

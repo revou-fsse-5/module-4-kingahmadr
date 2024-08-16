@@ -13,7 +13,7 @@ const MultiStepForm: React.FC = () => {
     email: "",
     streetAddress: "",
     city: "",
-    dateOfBirth: "dd/mm/yyyy",
+    dateOfBirth: null,
     password: "",
     zipCode: 0,
   };

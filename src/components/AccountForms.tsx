@@ -4,7 +4,7 @@ import { Field, ErrorMessage } from "formik";
 const AccountInformationForms: React.FC = () => {
   return (
     <section className="space-y-6 p-5 mx-auto max-w-md">
-      <h3 className="absolute left-5 top-5">Account Information</h3>
+      <h3 className="absolute left-5 top-5 text-xl">Account Information</h3>
       <div>
         <label
           htmlFor="username"

@@ -1,13 +1,16 @@
-import MultiStepForm from "./modules/MultiStepForm";
+// import MultiStepForm from "./modules/MultiStepForm";
 
-// import DateForm from "./components/DateForm";
+import CategoriesForm from "./components/CategoriesFormPost";
+import DataDisplay from "./components/DataDisplay";
 
 function App() {
   return (
     <>
       <div className="App">
-        <MultiStepForm />
+        {/* <MultiStepForm /> */}
         {/* <DateForm /> */}
+        <DataDisplay />
+        {/* <CategoriesForm /> */}
       </div>
     </>
   );

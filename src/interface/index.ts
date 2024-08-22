@@ -32,4 +32,5 @@ export interface LoginProps {
   username: string;
   email: string;
   password: string;
+  [key: string]: string | string[];
 }

@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { CategoriesProps, LoginProps, RegisterFormProps } from "../interface";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../components/context/UseAuthContext";
 
 const API_URL = "http://localhost:8080";
 const useFetchData = () => {
+  const { login, logout } = useAuthContext();
+  const navigate = useNavigate();
   const [data, setData] = useState<CategoriesProps[]>([]);
   const [userData, setUserData] = useState<RegisterFormProps[]>([]);
 
@@ -22,10 +26,18 @@ const useFetchData = () => {
       }
       const responseData = await response.json();
       console.log("User successfull login:", responseData);
-      setUserData(responseData.accessToken);
+
+      localStorage.setItem("accessToken", responseData.accessToken);
+      login();
+      navigate("/categories");
     } catch (error) {
+      alert(`Failed to login: ${error}`);
       console.log("Failed to login: ", error);
     }
+  };
+  const userLogout = () => {
+    logout();
+    navigate("/login");
   };
   const addUsers = async (data: RegisterFormProps) => {
     const bodyData = JSON.stringify(data);
@@ -43,6 +55,7 @@ const useFetchData = () => {
       const responseData = await response.json();
       console.log("User created:", responseData);
       setUserData((prevData) => [...prevData, responseData]);
+      navigate("/login");
     } catch (error) {
       console.log("Error adding new user: ", error);
     }
@@ -141,6 +154,7 @@ const useFetchData = () => {
     deleteCategories,
     addUsers,
     userLogin,
+    userLogout,
   };
 };
 

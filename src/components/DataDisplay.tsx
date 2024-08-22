@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useFetchData } from "../modules/UseFetchData";
 import CategoriesFormPost from "./CategoriesFormPost";
 import CategoriesFormPut from "./CategoriesFormPut";
+import { useAuthContext } from "./context/UseAuthContext";
 
 const DataDisplay = () => {
   const [toggle, setToggle] = useState<boolean>(false);
   const [togglePutForm, setTogglePutForm] = useState<number | null>(null);
-  const [togglePut, setTogglePut] = useState<boolean>(false);
+  // const [togglePut, setTogglePut] = useState<boolean>(false);
   const { data, getCategories, deleteCategories } = useFetchData();
+  const { displayPut, displayPutTrue, displayPutFalse } = useAuthContext();
+
   useEffect(() => {
     getCategories();
   }, []);
@@ -19,15 +22,16 @@ const DataDisplay = () => {
     setToggle(!toggle);
     console.log(toggle);
   };
-  const togglePutPopUp = () => {
-    setTogglePut(false);
-    console.log("toggle Put boll: ", togglePut);
-  };
+  // const togglePutPopUp = () => {
+  //   setTogglePut(false);
+  //   console.log("toggle Put boll: ", togglePut);
+  // };
   const displayUpdateCategoriesComponent = (id: number) => {
-    setTogglePut(true);
+    // setTogglePut(true);
+    displayPutTrue();
     setTogglePutForm(togglePutForm === id ? null : id);
     console.log(id);
-    console.log("toggle Put boll: ", togglePut);
+    console.log("toggle Put boll: ", displayPut);
   };
 
   return (
@@ -48,20 +52,21 @@ const DataDisplay = () => {
           </section>
           <section className="flex flex-col gap-3">
             <button
-              onClick={() =>
-                category.id !== undefined &&
-                displayUpdateCategoriesComponent(category.id)
-              }
+              onClick={() => {
+                if (category.id !== undefined) {
+                  displayUpdateCategoriesComponent(category.id);
+                }
+              }}
               className="text-white bg-red-600 p-2 border rounded-md border-red-600 hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Edit
             </button>
-            {togglePutForm === category.id && togglePut && (
+            {togglePutForm === category.id && displayPut && (
               <CategoriesFormPut
                 id={category.id}
                 name={category.name}
                 description={category.description}
-                onClose={togglePutPopUp}
+                onClose={displayPutFalse}
               />
             )}
             <button

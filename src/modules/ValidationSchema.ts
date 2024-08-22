@@ -26,8 +26,15 @@ const RegisterValidationForm = Yup.object().shape({
     .oneOf([Yup.ref("password"), undefined], "Passwords must match")
     .required("Required"),
 });
+const LoginValidationForm = Yup.object().shape({
+  username: Yup.string().required("Username is Required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
+});
+
 export {
   CategoreisValidationScheme,
   LoginValidationScheme,
   RegisterValidationForm,
+  LoginValidationForm,
 };

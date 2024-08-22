@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import { RegisterFormProps } from "../interface";
 import { useFetchData } from "../modules/UseFetchData";
 import tailwindStyles from "../scripts/constants/styles";
 import { RegisterValidationForm } from "../modules/ValidationSchema";
+
 const RegisterForm = () => {
   const { addUsers } = useFetchData();
 
@@ -24,18 +25,18 @@ const RegisterForm = () => {
       username: "",
       password: "",
       confirmPassword: "",
-      //   fullname: "Ahmad",
-      //   email: "ahmad@email.com",
-      //   dateOfBirth: "08/08/1998",
-      //   address: {
-      //     street: "Tegalgondo",
-      //     city: "Malang",
-      //     state: "Indonesia",
-      //     zipCode: 89098,
-      //   },
-      //   username: "ahmad",
-      //   password: "dddfRRR444%da",
-      //   confirmPassword: "dddfRRR444%da",
+      // fullname: "romiz",
+      // email: "romiz@email.com",
+      // dateOfBirth: "08/09/2000",
+      // address: {
+      //   street: "Tegalgondo",
+      //   city: "Malang",
+      //   state: "US",
+      //   zipCode: 1890920,
+      // },
+      // username: "romiz",
+      // password: "dddfRRR444%da",
+      // confirmPassword: "dddfRRR444%da",
     },
     validationSchema: RegisterValidationForm,
     onSubmit: (values, { setSubmitting }) => {

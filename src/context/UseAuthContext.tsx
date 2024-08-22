@@ -3,15 +3,9 @@ import React, { createContext, useState, useContext, ReactNode } from "react";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  displayPut: boolean;
-  displayPost: boolean;
+
   login: () => void;
   logout: () => void;
-  register: (email: string, password: string) => void; // Add register function
-  displayPutFalse: () => void;
-  displayPutTrue: () => void;
-  displayPostFalse: () => void;
-  displayPostTrue: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -22,8 +16,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return !!localStorage.getItem("accessToken");
   });
-  const [displayPut, setDisplayPut] = useState<boolean>(false);
-  const [displayPost, setDisplayPost] = useState<boolean>(false);
 
   const login = () => {
     setIsAuthenticated(true);
@@ -34,41 +26,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     localStorage.removeItem("accessToken");
   };
 
-  const register = (email: string, password: string) => {
-    const userData = { email, password };
-    localStorage.setItem("user", JSON.stringify(userData));
-    localStorage.setItem("authToken", "some-auth-token"); // Fake auth token for demonstration
-    login();
-  };
-
-  const displayPutFalse = () => {
-    setDisplayPut(false);
-
-    console.log("Toggle put bool: ", displayPut);
-  };
-  const displayPutTrue = () => {
-    setDisplayPut(true);
-  };
-  const displayPostFalse = () => {
-    setDisplayPost(false);
-  };
-  const displayPostTrue = () => {
-    setDisplayPost(true);
-  };
-
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
-        displayPut,
-        displayPost,
+
         login,
         logout,
-        register,
-        displayPutFalse,
-        displayPutTrue,
-        displayPostFalse,
-        displayPostTrue,
       }}
     >
       {children}

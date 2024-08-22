@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useFetchData } from "../modules/UseFetchData";
 import CategoriesFormPost from "./CategoriesFormPost";
 import CategoriesFormPut from "./CategoriesFormPut";
-import { useAuthContext } from "../context/UseAuthContext";
+// import { useAuthContext } from "../context/UseAuthContext";
 
 const DataDisplay = () => {
   const [toggle, setToggle] = useState<boolean>(false);
   const [togglePutForm, setTogglePutForm] = useState<number | null>(null);
-  // const [togglePut, setTogglePut] = useState<boolean>(false);
+  const [togglePut, setTogglePut] = useState<boolean>(false);
   const { data, getCategories, deleteCategories } = useFetchData();
-  const { displayPut, displayPutTrue, displayPutFalse } = useAuthContext();
 
   useEffect(() => {
     getCategories();
@@ -22,16 +21,15 @@ const DataDisplay = () => {
     setToggle(!toggle);
     console.log(toggle);
   };
-  // const togglePutPopUp = () => {
-  //   setTogglePut(false);
-  //   console.log("toggle Put boll: ", togglePut);
-  // };
+  const displayTogglePut = () => {
+    setTogglePut(!togglePut);
+  };
   const displayUpdateCategoriesComponent = (id: number) => {
-    // setTogglePut(true);
-    displayPutTrue();
-    setTogglePutForm(togglePutForm === id ? null : id);
-    console.log(id);
-    console.log("toggle Put boll: ", displayPut);
+    setTogglePut(!togglePut);
+
+    setTogglePutForm(id);
+    console.log("Ini data id", id);
+    console.log("Ini data dari togglePutForm", togglePutForm);
   };
 
   return (
@@ -61,12 +59,12 @@ const DataDisplay = () => {
             >
               Edit
             </button>
-            {togglePutForm === category.id && displayPut && (
+            {togglePutForm === category.id && togglePut && (
               <CategoriesFormPut
                 id={category.id}
                 name={category.name}
                 description={category.description}
-                onClose={displayPutFalse}
+                onClose={displayTogglePut}
               />
             )}
             <button

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CategoriesProps, LoginProps, RegisterFormProps } from "../interface";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/UseAuthContext";
@@ -115,16 +115,18 @@ const useFetchData = () => {
       }
 
       const responseData = await response.json();
-
+      //
       setData((prevData) =>
         prevData.map((category) =>
           category.id === id ? responseData : category
         )
       );
+      // console.log("data setelah update: ", data);
     } catch (error) {
       console.error("Error updating category:", error);
     }
   };
+  // console.log("Ini data categories: ", data);
   const deleteCategories = async (id: number) => {
     try {
       const response = await fetch(`${API_URL}/categories/${id}`, {
@@ -144,7 +146,9 @@ const useFetchData = () => {
       console.error("Error deleting category:", error);
     }
   };
-
+  // useEffect(() => {
+  //   getCategories();
+  // }, [data]);
   return {
     data,
     userData,

@@ -4,9 +4,10 @@ import CategoriesFormPost from "./CategoriesFormPost";
 import CategoriesFormPut from "./CategoriesFormPut";
 
 const DataDisplay = () => {
-  const [togglePostForm, setTogglePostForm] = useState<boolean>(false);
+  const [toggle, setToggle] = useState<boolean>(false);
   const [togglePutForm, setTogglePutForm] = useState<number | null>(null);
-  const { data, getCategories } = useFetchData();
+  const [togglePut, setTogglePut] = useState<boolean>(false);
+  const { data, getCategories, deleteCategories } = useFetchData();
   useEffect(() => {
     getCategories();
   }, []);
@@ -14,14 +15,21 @@ const DataDisplay = () => {
     getCategories();
     console.log(data);
   };
-  const displayAddCategoriesComponent = () => {
-    setTogglePostForm(!togglePostForm);
-    console.log(togglePostForm);
+  const displayComponent = () => {
+    setToggle(!toggle);
+    console.log(toggle);
+  };
+  const togglePutPopUp = () => {
+    setTogglePut(false);
+    console.log("toggle Put boll: ", togglePut);
   };
   const displayUpdateCategoriesComponent = (id: number) => {
+    setTogglePut(true);
     setTogglePutForm(togglePutForm === id ? null : id);
     console.log(id);
+    console.log("toggle Put boll: ", togglePut);
   };
+
   return (
     <section className="flex flex-col max-w-screen-md mx-auto">
       <h1 className="text-5xl text-white text-center mt-5"> Categories List</h1>
@@ -44,19 +52,24 @@ const DataDisplay = () => {
                 category.id !== undefined &&
                 displayUpdateCategoriesComponent(category.id)
               }
-              //   onClick={() => console.log(category.name)}
               className="text-white bg-red-600 p-2 border rounded-md border-red-600 hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Edit
             </button>
-            {togglePutForm === category.id && (
+            {togglePutForm === category.id && togglePut && (
               <CategoriesFormPut
                 id={category.id}
                 name={category.name}
                 description={category.description}
+                onClose={togglePutPopUp}
               />
             )}
-            <button className="text-white bg-red-600 p-2 border rounded-md border-red-600 hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button
+              onClick={() =>
+                category.id !== undefined && deleteCategories(category.id)
+              }
+              className="text-white bg-red-600 p-2 border rounded-md border-red-600 hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
               Delete
             </button>
           </section>
@@ -70,13 +83,22 @@ const DataDisplay = () => {
           Refetch Data
         </button>
         <button
-          onClick={displayAddCategoriesComponent}
+          onClick={displayComponent}
           className="mx-auto text-white bg-red-600 p-2 border rounded-md border-red-600 hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Add Categories
         </button>
       </section>
-      <section>{togglePostForm && <CategoriesFormPost />}</section>c
+      <section>
+        {toggle && (
+          <CategoriesFormPost
+            name={""}
+            description={""}
+            onClose={displayComponent}
+          />
+        )}
+      </section>
+      c
     </section>
   );
 };

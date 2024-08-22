@@ -2,8 +2,18 @@ import React from "react";
 import { CategoriesProps } from "../interface";
 import { useFetchData } from "../modules/UseFetchData";
 import { useFormik } from "formik";
+import { CategoreisValidationScheme } from "../modules/ValidationSchema";
+import tailwindStyles from "../scripts/constants/styles";
 
-const CategoriesFormPut = (id: number, name: string, description: string) => {
+interface CategoriesFormPutProps extends CategoriesProps {
+  onClose?: () => void;
+}
+const CategoriesFormPut: React.FC<CategoriesFormPutProps> = ({
+  id,
+  name,
+  description,
+  onClose,
+}) => {
   const { updateCategories } = useFetchData();
 
   const formik = useFormik<CategoriesProps>({
@@ -11,44 +21,68 @@ const CategoriesFormPut = (id: number, name: string, description: string) => {
       name: name,
       description: description,
     },
+    validationSchema: CategoreisValidationScheme,
 
     onSubmit: (values) => {
-      updateCategories(id, values.name, values.description);
+      if (id) {
+        updateCategories(id, values.name, values.description);
+      } else {
+        alert("id not found");
+      }
 
       console.log(values);
     },
   });
 
   return (
-    <div className="absolute h-[50vh] w-full flex justify-center items-center flex-col">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <form
-        className="bg-white border-2 border-gray-300 p-4 rounded-md max-wd-80 min-h-[300px] flex flex-col justify-between w-1/2"
+        className="relative bg-white border-2 border-gray-300 p-6 rounded-lg shadow-lg w-full max-w-md flex flex-col space-y-4"
         onSubmit={formik.handleSubmit}
       >
-        <label className="text-2xl text-gray-900" htmlFor="name">
+        {/* Close Button */}
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+        >
+          &times; {/* This is the 'X' symbol */}
+        </button>
+        <label className="text-lg font-semibold text-gray-900" htmlFor="name">
           Name
         </label>
         <input
-          className="block w-full px-3 py-2 mt-1 border border-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           id="name"
           name="name"
           type="text"
           onChange={formik.handleChange}
           value={formik.values.name}
         />
-        <label className="text-2xl text-gray-900" htmlFor="description">
+        {formik.errors.name && formik.touched.name ? (
+          <div className={tailwindStyles.errorText}>{formik.errors.name}</div>
+        ) : null}
+        <label
+          className="text-lg font-semibold text-gray-900"
+          htmlFor="description"
+        >
           Description
         </label>
         <input
-          className="block w-full px-3 py-2 mt-1 border border-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           id="description"
           name="description"
           type="text"
           onChange={formik.handleChange}
           value={formik.values.description}
         />
+        {formik.errors.description && formik.touched.description ? (
+          <div className={tailwindStyles.errorText}>
+            {formik.errors.description}
+          </div>
+        ) : null}
         <button
-          className="w-24 px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           type="submit"
         >
           Update Data

@@ -6,7 +6,7 @@ import Navbar from "./components/NavbarComponent";
 import RegisterForm from "./components/RegisterForm";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./modules/ProtectedRoute";
-import { AuthProvider } from "./components/context/UseAuthContext";
+import { AuthProvider } from "./context/UseAuthContext";
 
 const NotFound: React.FC = () => <h2>404 Not Found</h2>;
 function App() {

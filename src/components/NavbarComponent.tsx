@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuthContext } from "./context/UseAuthContext";
+import { useAuthContext } from "../context/UseAuthContext";
 import { useFetchData } from "../modules/UseFetchData";
 import { useNavigate } from "react-router-dom";
 

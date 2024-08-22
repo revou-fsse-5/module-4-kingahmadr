@@ -1,5 +1,5 @@
-import { CategoriesContextProps } from "../../interface";
-import { CategoriesContext } from "../../modules/UseFetchData";
+import { CategoriesContextProps } from "../interface";
+import { CategoriesContext } from "../modules/UseFetchData";
 import { useContext } from "react";
 
 export const useCategories = (): CategoriesContextProps => {

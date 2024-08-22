@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CategoriesProps, LoginProps, RegisterFormProps } from "../interface";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../components/context/UseAuthContext";
+import { useAuthContext } from "../context/UseAuthContext";
 
 const API_URL = "http://localhost:8080";
 const useFetchData = () => {

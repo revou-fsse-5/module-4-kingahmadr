@@ -54,6 +54,9 @@ const useFetchData = () => {
       if (!response.ok) {
         // throw new Error(`Error adding user data: ${response.statusText}`);
         alert(`Error adding user data: ${response.statusText}`);
+        console.log(`Error adding user data: ${response.statusText}`);
+        navigate("/register");
+        return;
       }
       const responseData = await response.json();
       setUserData((prevData) => [...prevData, responseData]);
@@ -90,12 +93,18 @@ const useFetchData = () => {
       });
       if (!response.ok) {
         // throw new Error(`Error posting data: ${response.statusText}`);
-        alert(`Error posting data: ${response.statusText}`);
+        alert(`Response text on error add data: ${response.statusText}`);
+        console.log(response);
+        return;
       }
       const responseData = await response.json();
       setData((prevData) => [...prevData, responseData]);
+      navigate("/catagories");
     } catch (error) {
       alert(`Error posting data: ${error}`);
+      console.log(error);
+      navigate("/categories");
+      return;
     }
   };
 
@@ -125,6 +134,7 @@ const useFetchData = () => {
           category.id === id ? responseData : category
         )
       );
+      navigate(0);
       // console.log("data setelah update: ", data);
     } catch (error) {
       alert(`Error updating data: ${error}`);

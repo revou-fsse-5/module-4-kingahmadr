@@ -4,7 +4,6 @@ import { useFetchData } from "../modules/UseFetchData";
 import { useFormik } from "formik";
 import { CategoreisValidationScheme } from "../modules/ValidationSchema";
 import tailwindStyles from "../scripts/constants/styles";
-import { useNavigate } from "react-router-dom";
 
 interface CategoriesFormPutProps extends CategoriesProps {
   onClose?: () => void;
@@ -16,10 +15,10 @@ const CategoriesFormPut: React.FC<CategoriesFormPutProps> = ({
   onClose,
 }) => {
   const { updateCategories } = useFetchData();
-  const navigate = useNavigate();
-  const refreshPage = () => {
-    navigate(0);
-  };
+  // const navigate = useNavigate();
+  // const refreshPage = () => {
+  //   navigate(0);
+  // };
   const formik = useFormik<CategoriesProps>({
     initialValues: {
       name: name,
@@ -100,7 +99,8 @@ const CategoriesFormPut: React.FC<CategoriesFormPutProps> = ({
         <button
           className="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           type="submit"
-          onClick={refreshPage}
+          // onClick={refreshPage}
+          disabled={formik.isSubmitting}
         >
           Update Data
         </button>

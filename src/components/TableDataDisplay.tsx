@@ -38,7 +38,7 @@ const TableDataDisplay = () => {
   };
 
   return (
-    <section className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-md mx-auto">
+    <section className="mb-20 relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-md mx-auto">
       <button
         onClick={displayComponent}
         className=" my-5 text-white bg-red-600 px-4 py-2 border rounded-md border-red-600 hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

@@ -1,4 +1,3 @@
-import React from "react";
 import { useFormik } from "formik";
 import { LoginProps } from "../interface";
 import { useFetchData } from "../modules/UseFetchData";

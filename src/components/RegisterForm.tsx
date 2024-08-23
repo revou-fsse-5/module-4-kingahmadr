@@ -1,4 +1,3 @@
-import React from "react";
 import { useFormik } from "formik";
 import { RegisterFormProps } from "../interface";
 import { useFetchData } from "../modules/UseFetchData";

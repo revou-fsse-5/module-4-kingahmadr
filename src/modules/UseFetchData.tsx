@@ -115,7 +115,6 @@ const useFetchData = () => {
       }
 
       const responseData = await response.json();
-      //
       setData((prevData) =>
         prevData.map((category) =>
           category.id === id ? responseData : category

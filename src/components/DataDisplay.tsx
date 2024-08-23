@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useFetchData } from "../modules/UseFetchData";
 import CategoriesFormPost from "./CategoriesFormPost";
 import CategoriesFormPut from "./CategoriesFormPut";
-// import { useAuthContext } from "../context/UseAuthContext";
 
 const DataDisplay = () => {
   const [toggle, setToggle] = useState<boolean>(false);

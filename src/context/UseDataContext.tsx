@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
-import { useFetchData } from "../modules/UseFetchData";
 
 interface AuthContextType {
   isAuthenticated: boolean;

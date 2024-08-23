@@ -2,7 +2,6 @@ import LoginForm from "./components/LoginForm";
 import Navbar from "./components/NavbarComponent";
 import RegisterForm from "./components/RegisterForm";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from "./modules/ProtectedRoute";
 import { DataProvider } from "./context/UseDataContext";
 import TableDataDisplay from "./components/TableDataDisplay";

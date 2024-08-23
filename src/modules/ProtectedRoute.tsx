@@ -4,14 +4,13 @@ import { useDataContext } from "../context/UseDataContext";
 
 const ProtectedRoute: React.FC = () => {
   const { isAuthenticated } = useDataContext();
-  console.log("protect", isAuthenticated);
 
   if (isAuthenticated) {
-    console.log("Accessing protected route");
+    // Allow access to the protected route
     return <Outlet />;
   } else {
-    console.log("Redirecting to login");
-    return <Navigate to="/login" />;
+    // Redirect to login if not authenticated
+    return <Navigate to="/login" replace />;
   }
 };
 

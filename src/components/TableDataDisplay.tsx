@@ -2,34 +2,41 @@ import React, { useEffect, useState } from "react";
 import { useFetchData } from "../modules/UseFetchData";
 import CategoriesFormPost from "./CategoriesFormPost";
 import CategoriesFormPut from "./CategoriesFormPut";
+import ModalConfirmation from "./ModalConfirmation";
 
 const TableDataDisplay = () => {
   const [toggle, setToggle] = useState<boolean>(false);
   const [togglePutForm, setTogglePutForm] = useState<number | null>(null);
+  const [toggleDeleteModal, setToggleDeleteModal] = useState<number | null>(
+    null
+  );
   const [togglePut, setTogglePut] = useState<boolean>(false);
-  const { data, getCategories, deleteCategories } = useFetchData();
+  const [toggleDelete, setToggleDelete] = useState<boolean>(false);
+  const { data, getCategories } = useFetchData();
 
   useEffect(() => {
     getCategories();
   }, []);
-  //   const handleOnClick = () => {
-  //     getCategories();
-  //     //   console.log(data);
-  //   };
+
   const displayComponent = () => {
     setToggle(!toggle);
-    //   console.log(toggle);
   };
   const displayTogglePut = () => {
     setTogglePut(!togglePut);
   };
+
   const displayUpdateCategoriesComponent = (id: number) => {
     setTogglePut(!togglePut);
-
     setTogglePutForm(id);
-    //   console.log("Ini data id", id);
-    //   console.log("Ini data dari togglePutForm", togglePutForm);
   };
+  const displayDeleteComponent = (id: number) => {
+    setToggleDelete(!toggleDelete);
+    setToggleDeleteModal(id);
+  };
+  const displayToggleDelete = () => {
+    setToggleDelete(!toggleDelete);
+  };
+
   return (
     <section className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-md mx-auto">
       <button
@@ -95,14 +102,30 @@ const TableDataDisplay = () => {
                     onClose={displayTogglePut}
                   />
                 )}
-                <button
+                {/* <button
                   onClick={() =>
                     category.id !== undefined && deleteCategories(category.id)
                   }
                   className="text-white bg-red-600 px-4 py-2 border rounded-md border-red-600 hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Delete
+                </button> */}
+                <button
+                  onClick={() => {
+                    if (category.id !== undefined) {
+                      displayDeleteComponent(category.id);
+                    }
+                  }}
+                  className="text-white bg-red-600 px-4 py-2 border rounded-md border-red-600 hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Delete
                 </button>
+                {toggleDeleteModal === category.id && toggleDelete && (
+                  <ModalConfirmation
+                    id={category.id}
+                    onClose={displayToggleDelete}
+                  />
+                )}
               </td>
             </tr>
           ))}

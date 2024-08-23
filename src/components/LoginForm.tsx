@@ -3,9 +3,22 @@ import { LoginProps } from "../interface";
 import { useFetchData } from "../modules/UseFetchData";
 import tailwindStyles from "../scripts/constants/styles";
 import { LoginValidationForm } from "../modules/ValidationSchema";
+// import { useState } from "react";
+import { useDataContext } from "../context/UseDataContext";
 
 const LoginForm = () => {
   const { userLogin } = useFetchData();
+  const { checked, handleCheckboxChange } = useDataContext();
+  // const [checked, setChecked] = useState(false);
+  // const handleCheckboxChange = () => {
+  //   setChecked(!checked);
+  //   localStorage.setItem("key", "remember Me");
+  // };
+
+  if (checked === false) {
+    localStorage.removeItem("key");
+    localStorage.removeItem("email");
+  }
 
   const handleSubmit = (data: LoginProps) => {
     userLogin(data);
@@ -87,6 +100,17 @@ const LoginForm = () => {
             {formik.errors.password}
           </div>
         ) : null}
+        <label htmlFor="checkbox" className="inline-flex items-center">
+          <input
+            id="checkbox"
+            name="checkbox"
+            type="checkbox"
+            className="form-checkbox h-5 w-5 text-indigo-600"
+            checked={checked}
+            onChange={handleCheckboxChange}
+          />
+          <span className="ml-2 text-gray-700">Remember Me</span>
+        </label>
         <button
           className="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           type="submit"

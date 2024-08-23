@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./modules/ProtectedRoute";
 import { DataProvider } from "./context/UseDataContext";
 import TableDataDisplay from "./components/TableDataDisplay";
+import MultiStepForm from "./modules/MultiStepForm";
 
 const NotFound: React.FC = () => <h2>404 Not Found</h2>;
 
@@ -22,6 +23,7 @@ function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="/categories" element={<TableDataDisplay />} />
               </Route>
+              <Route path="/multistepform" element={<MultiStepForm />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>

@@ -24,16 +24,7 @@ const ModalConfirmation: React.FC<ModalConfirmationProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-      {/* Close Button */}
       <div className="relative bg-white border border-gray-300 p-6 rounded-lg shadow-lg w-full max-w-md space-y-4">
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none"
-        >
-          &times;
-        </button>
-
         <div className="space-y-2">
           <h1 className="text-left text-xl text-black">
             Yakin nih di delete bos?

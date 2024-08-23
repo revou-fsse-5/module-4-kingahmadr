@@ -9,6 +9,7 @@ const useFetchData = () => {
   const navigate = useNavigate();
   const [data, setData] = useState<CategoriesProps[]>([]);
   const [userData, setUserData] = useState<RegisterFormProps[]>([]);
+  // const [userLoginData, setUserLoginData] = useState([]);
 
   // User CRUD
   const userLogin = async (data: LoginProps) => {
@@ -22,17 +23,18 @@ const useFetchData = () => {
         body: bodyData,
       });
       if (!response.ok) {
-        throw new Error(`Error adding user data: ${response.statusText}`);
+        // throw new Error(`Login Error: ${response.statusText}`);
+        alert(`Login Error: ${response.statusText}`);
       }
       const responseData = await response.json();
       console.log("User successfull login:", responseData);
-
+      // setUserLoginData(responseData);
       localStorage.setItem("accessToken", responseData.accessToken);
+      localStorage.setItem("email", responseData.user.email);
       login();
       navigate("/categories");
     } catch (error) {
       alert(`Failed to login: ${error}`);
-      console.log("Failed to login: ", error);
     }
   };
   const userLogout = () => {
@@ -50,14 +52,14 @@ const useFetchData = () => {
         body: bodyData,
       });
       if (!response.ok) {
-        throw new Error(`Error adding user data: ${response.statusText}`);
+        // throw new Error(`Error adding user data: ${response.statusText}`);
+        alert(`Error adding user data: ${response.statusText}`);
       }
       const responseData = await response.json();
-      console.log("User created:", responseData);
       setUserData((prevData) => [...prevData, responseData]);
       navigate("/login");
     } catch (error) {
-      console.log("Error adding new user: ", error);
+      alert(`Error adding new user: ${error}`);
     }
   };
 
@@ -66,12 +68,13 @@ const useFetchData = () => {
     try {
       const response = await fetch(`${API_URL}/categories`, { method: "GET" });
       if (!response.ok) {
-        throw new Error(`Error fetching data: ${response.statusText}`);
+        // throw new Error(`Error fetching data: ${response.statusText}`);
+        alert(`Error fetching data: ${response.statusText}`);
       }
       const responseData = await response.json();
       setData(responseData);
     } catch (error) {
-      console.log(error);
+      alert(`Error fetching data: ${error}`);
     }
   };
 
@@ -86,12 +89,13 @@ const useFetchData = () => {
         body: bodyData,
       });
       if (!response.ok) {
-        throw new Error(`Error posting data: ${response.statusText}`);
+        // throw new Error(`Error posting data: ${response.statusText}`);
+        alert(`Error posting data: ${response.statusText}`);
       }
       const responseData = await response.json();
       setData((prevData) => [...prevData, responseData]);
     } catch (error) {
-      console.log(error);
+      alert(`Error posting data: ${error}`);
     }
   };
 
@@ -111,7 +115,8 @@ const useFetchData = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`Error updating data: ${response.statusText}`);
+        // throw new Error(`Error updating data: ${response.statusText}`);
+        alert(`Error updating data: ${response.statusText}`);
       }
 
       const responseData = await response.json();
@@ -122,7 +127,7 @@ const useFetchData = () => {
       );
       // console.log("data setelah update: ", data);
     } catch (error) {
-      console.error("Error updating category:", error);
+      alert(`Error updating data: ${error}`);
     }
   };
   // console.log("Ini data categories: ", data);
@@ -137,12 +142,13 @@ const useFetchData = () => {
       console.log(response);
 
       if (!response.ok) {
-        throw new Error(`Error deleting data: ${response.statusText}`);
+        // throw new Error(`Error deleting data: ${response.statusText}`);
+        alert(`Error deleting data: ${response.statusText}`);
       }
 
       setData((prevData) => prevData.filter((category) => category.id !== id));
     } catch (error) {
-      console.error("Error deleting category:", error);
+      alert(`Error deleting data: ${error}`);
     }
   };
   // useEffect(() => {
@@ -151,6 +157,7 @@ const useFetchData = () => {
   return {
     data,
     userData,
+    // userLoginData,
     getCategories,
     addCategories,
     updateCategories,

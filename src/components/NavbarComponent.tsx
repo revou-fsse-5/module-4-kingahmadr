@@ -15,6 +15,14 @@ const Navbar: React.FC = () => {
         <ul className="flex space-x-4">
           <li className="text-white hover:text-gray-400">
             <button
+              onClick={() => navigate("/multistepform")}
+              className="text-white hover:text-gray-400"
+            >
+              Multi Step Form
+            </button>
+          </li>
+          <li className="text-white hover:text-gray-400">
+            <button
               onClick={() => navigate("/")}
               className="text-white hover:text-gray-400"
             >

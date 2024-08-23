@@ -1,9 +1,12 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
+import { useFetchData } from "../modules/UseFetchData";
 
 interface AuthContextType {
   isAuthenticated: boolean;
   login: () => void;
   logout: () => void;
+  checked?: boolean;
+  handleCheckboxChange?: () => void;
 }
 
 const DataContext = createContext<AuthContextType | undefined>(undefined);
@@ -14,7 +17,13 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return !!localStorage.getItem("accessToken");
   });
-
+  const [checked, setChecked] = useState<boolean>(false);
+  // const { userLoginData } = useFetchData();
+  const handleCheckboxChange = () => {
+    setChecked(!checked);
+    // localStorage.setItem("email", userLoginData.email);
+    localStorage.setItem("key", "remember me");
+  };
   const login = () => {
     setIsAuthenticated(true);
   };
@@ -28,8 +37,10 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({
     <DataContext.Provider
       value={{
         isAuthenticated,
+        checked,
         login,
         logout,
+        handleCheckboxChange,
       }}
     >
       {children}

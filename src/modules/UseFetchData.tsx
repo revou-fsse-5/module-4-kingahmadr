@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CategoriesProps, LoginProps, RegisterFormProps } from "../interface";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../context/UseAuthContext";
+import { useDataContext } from "../context/UseDataContext";
 
 const API_URL = "http://localhost:8080";
 const useFetchData = () => {
-  const { login, logout } = useAuthContext();
+  const { login, logout } = useDataContext();
   const navigate = useNavigate();
   const [data, setData] = useState<CategoriesProps[]>([]);
   const [userData, setUserData] = useState<RegisterFormProps[]>([]);

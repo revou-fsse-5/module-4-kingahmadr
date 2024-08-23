@@ -1,10 +1,10 @@
 import React from "react";
-import { useAuthContext } from "../context/UseAuthContext";
+import { useDataContext } from "../context/UseDataContext";
 import { useFetchData } from "../modules/UseFetchData";
 import { useNavigate } from "react-router-dom";
 
 const Navbar: React.FC = () => {
-  const { isAuthenticated } = useAuthContext();
+  const { isAuthenticated } = useDataContext();
   const { userLogout } = useFetchData();
   const navigate = useNavigate();
 

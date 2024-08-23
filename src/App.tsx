@@ -1,19 +1,18 @@
-// import MultiStepForm from "./modules/MultiStepForm";
-
-import DataDisplay from "./components/DataDisplay";
 import LoginForm from "./components/LoginForm";
 import Navbar from "./components/NavbarComponent";
 import RegisterForm from "./components/RegisterForm";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from "./modules/ProtectedRoute";
-import { AuthProvider } from "./context/UseAuthContext";
+import { DataProvider } from "./context/UseDataContext";
 import TableDataDisplay from "./components/TableDataDisplay";
 
 const NotFound: React.FC = () => <h2>404 Not Found</h2>;
+
 function App() {
   return (
     <>
-      <AuthProvider>
+      <DataProvider>
         <div className="App">
           <Router>
             <Navbar />
@@ -28,7 +27,7 @@ function App() {
             </Routes>
           </Router>
         </div>
-      </AuthProvider>
+      </DataProvider>
     </>
   );
 }

@@ -1,11 +1,48 @@
-import { CategoriesContextProps } from "../interface";
-import { CategoriesContext } from "../modules/UseFetchData";
-import { useContext } from "react";
+// src/context/AuthContext.tsx
+import React, { createContext, useState, useContext, ReactNode } from "react";
 
-export const useCategories = (): CategoriesContextProps => {
-  const context = useContext(CategoriesContext);
-  if (!context) {
-    throw new Error("useCategories must be used within a CategoriesProvider");
+interface AuthContextType {
+  isAuthenticated: boolean;
+
+  login: () => void;
+  logout: () => void;
+}
+
+const DataContext = createContext<AuthContextType | undefined>(undefined);
+
+export const DataProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return !!localStorage.getItem("accessToken");
+  });
+
+  const login = () => {
+    setIsAuthenticated(true);
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem("accessToken");
+  };
+
+  return (
+    <DataContext.Provider
+      value={{
+        isAuthenticated,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </DataContext.Provider>
+  );
+};
+
+export const useDataContext = () => {
+  const context = useContext(DataContext);
+  if (context === undefined) {
+    throw new Error("useAuthContext must be used within an AuthProvider");
   }
   return context;
 };

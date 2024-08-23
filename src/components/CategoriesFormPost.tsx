@@ -3,7 +3,7 @@ import { useFetchData } from "../modules/UseFetchData";
 import { useFormik } from "formik";
 import { CategoreisValidationScheme } from "../modules/ValidationSchema";
 import tailwindStyles from "../scripts/constants/styles";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface CategoriesFormPostProps extends CategoriesProps {
   onClose?: () => void;

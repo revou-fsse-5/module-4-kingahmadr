@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import StepIndicator from "../components/StepIndicator";
-import SwitchCaseStep from "../components/SwitchCaseStep";
+// import SwitchCaseStep from "../components/SwitchCaseStep";
 import { StepOneSchema, StepTwoSchema, StepThreeSchema } from "./Scheme";
 import { useFetchData } from "./UseFetchData";
 import { MultiStepRegistrationProps } from "../interface";
+import PersonalRegistrationForms from "../components/PersonalForms";
+import AddressInformationForms from "../components/AddressForms";
+import AccountInformationForms from "../components/AccountForms";
 
 const MultiStepForm: React.FC = () => {
   const { addUsersMultiStep } = useFetchData();
@@ -21,6 +24,7 @@ const MultiStepForm: React.FC = () => {
       state: "",
       zipCode: 0,
     },
+    confirmPassowrd: "",
     password: "",
   };
   const validationSchema = [StepOneSchema, StepTwoSchema, StepThreeSchema];
@@ -44,22 +48,43 @@ const MultiStepForm: React.FC = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema[step - 1]}
-      onSubmit={(values) => {
+      onSubmit={(values, { setSubmitting }) => {
         const { confirmPassword, ...dataToSubmit } = values;
-        if (step === validationSchema.length) {
-          handleSubmit(dataToSubmit);
-        } else {
-          handleNext();
-        }
+        setTimeout(() => {
+          if (step === validationSchema.length) {
+            handleSubmit(dataToSubmit);
+          } else {
+            setSubmitting(false);
+            handleNext();
+          }
+        });
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, handleBlur, handleChange }) => (
         <section className="flex flex-col justify-center">
           <div className="mt-20 self-center">
             <StepIndicator step={step} />
           </div>
           <Form className="relative flex flex-col mx-auto mt-10 w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
-            <SwitchCaseStep index={step} />
+            {/* <SwitchCaseStep index={step} /> */}
+            <div>
+              {step === 1 ? (
+                <PersonalRegistrationForms
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              ) : step === 2 ? (
+                <AddressInformationForms
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              ) : (
+                <AccountInformationForms
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              )}
+            </div>
 
             <div className="mx-auto flex gap-4">
               {step > 1 && (

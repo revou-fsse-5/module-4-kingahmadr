@@ -1,7 +1,12 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
 
-const AccountInformationForms: React.FC = () => {
+interface AccountFormsProps {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+}
+
+const AccountInformationForms = ({ onChange, onBlur }: AccountFormsProps) => {
   return (
     <section className="space-y-6 p-5 mx-auto max-w-md">
       <h3 className="absolute left-5 top-5 text-xl">Account Information</h3>
@@ -16,6 +21,8 @@ const AccountInformationForms: React.FC = () => {
           id="username"
           name="username"
           type="text"
+          onChange={onChange}
+          onBlur={onBlur}
           className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         <ErrorMessage
@@ -35,6 +42,8 @@ const AccountInformationForms: React.FC = () => {
           id="password"
           name="password"
           type="password"
+          onChange={onChange}
+          onBlur={onBlur}
           className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         <ErrorMessage
@@ -54,6 +63,8 @@ const AccountInformationForms: React.FC = () => {
           id="confirmPassword"
           name="confirmPassword"
           type="password"
+          onChange={onChange}
+          onBlur={onBlur}
           className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
 

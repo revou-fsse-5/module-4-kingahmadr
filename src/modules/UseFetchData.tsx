@@ -65,6 +65,7 @@ const useFetchData = () => {
       }
       const responseData = await response.json();
       setUserData((prevData) => [...prevData, responseData]);
+      alert(`Success Adding new User`);
       navigate("/login");
     } catch (error) {
       alert(`Error adding new user: ${error}`);
@@ -88,6 +89,7 @@ const useFetchData = () => {
       }
       const responseData = await response.json();
       setUserData((prevData) => [...prevData, responseData]);
+      alert(`Success Adding new User`);
       navigate("/login");
     } catch (error) {
       alert(`Error adding new user multistep: ${error}`);

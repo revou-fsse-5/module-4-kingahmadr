@@ -12,14 +12,16 @@ const MultiStepForm: React.FC = () => {
 
   const initialValues = {
     fullname: "",
-    username: "",
     email: "",
-    street: "",
-    state: "",
-    city: "",
     dateOfBirth: "",
+    username: "",
+    address: {
+      street: "",
+      city: "",
+      state: "",
+      zipCode: 0,
+    },
     password: "",
-    zipCode: 0,
   };
   const validationSchema = [StepOneSchema, StepTwoSchema, StepThreeSchema];
 
@@ -33,21 +35,6 @@ const MultiStepForm: React.FC = () => {
     console.log(step);
   };
 
-  // const handleSubmit = (values: typeof initialValues) => {
-  //   // Submit final form values
-  //   alert(
-  //     `Register Successful!\n\n
-  //     Fullname: ${values.fullname}\n
-  //     Email: ${values.email}\n
-  //     Date of Birth: ${values.dateOfBirth}\n
-  //     Street Address: ${values.streetAddress}\n
-  //     City: ${values.city}\n
-  //     Zip Code: ${values.zipCode}\n
-  //     Username: ${values.username}\n
-  //     Password: ${values.password}`
-  //   );
-  //   console.log(values);
-  // };
   const handleSubmit = (values: MultiStepRegistrationProps) => {
     addUsersMultiStep(values);
     // console.log("data values", values);
@@ -66,7 +53,7 @@ const MultiStepForm: React.FC = () => {
         }
       }}
     >
-      {({ isValid }) => (
+      {({ isSubmitting }) => (
         <section className="flex flex-col justify-center">
           <div className="mt-20 self-center">
             <StepIndicator step={step} />
@@ -87,7 +74,7 @@ const MultiStepForm: React.FC = () => {
               <button
                 className="w-24 px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 type="submit"
-                disabled={!isValid}
+                disabled={isSubmitting}
               >
                 {step === validationSchema.length ? "Submit" : "Next"}
               </button>

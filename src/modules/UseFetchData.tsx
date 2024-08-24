@@ -83,7 +83,7 @@ const useFetchData = () => {
       if (!response.ok) {
         // throw new Error(`Error adding user data: ${response.statusText}`);
         alert(`Error adding user data multistep: ${response.statusText}`);
-        navigate("/register");
+        navigate("/multistepform");
         return;
       }
       const responseData = await response.json();
@@ -127,7 +127,7 @@ const useFetchData = () => {
       }
       const responseData = await response.json();
       setData((prevData) => [...prevData, responseData]);
-      navigate("/catagories");
+      navigate(0);
     } catch (error) {
       alert(`Error posting data: ${error}`);
       console.log(error);

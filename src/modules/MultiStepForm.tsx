@@ -3,8 +3,10 @@ import { Formik, Form } from "formik";
 import StepIndicator from "../components/StepIndicator";
 import SwitchCaseStep from "../components/SwitchCaseStep";
 import { StepOneSchema, StepTwoSchema, StepThreeSchema } from "./Scheme";
+import { useFetchData } from "./UseFetchData";
 
 const MultiStepForm: React.FC = () => {
+  const { addUsersMultiStep } = useFetchData();
   const [step, setStep] = useState(1);
 
   const initialValues = {

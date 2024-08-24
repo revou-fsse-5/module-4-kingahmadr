@@ -65,6 +65,29 @@ const useFetchData = () => {
       alert(`Error adding new user: ${error}`);
     }
   };
+  const addUsersMultiStep = async (data: RegisterFormProps) => {
+    const bodyData = JSON.stringify(data);
+    try {
+      const response = await fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: bodyData,
+      });
+      if (!response.ok) {
+        // throw new Error(`Error adding user data: ${response.statusText}`);
+        alert(`Error adding user data multistep: ${response.statusText}`);
+        navigate("/register");
+        return;
+      }
+      const responseData = await response.json();
+      setUserData((prevData) => [...prevData, responseData]);
+      navigate("/login");
+    } catch (error) {
+      alert(`Error adding new user multistep: ${error}`);
+    }
+  };
 
   // Categories CRUD
   const getCategories = async () => {
@@ -167,6 +190,7 @@ const useFetchData = () => {
   return {
     data,
     userData,
+    addUsersMultiStep,
     // userLoginData,
     getCategories,
     addCategories,

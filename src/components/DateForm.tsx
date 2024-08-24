@@ -47,8 +47,8 @@ const DateForm: React.FC = () => {
                   value={values.dateOfBirth}
                   onChange={(val) => setFieldValue("dateOfBirth", val)}
                   format="y-MM-dd"
-                  clearIcon={null}
-                  calendarIcon={null}
+                  // clearIcon={null}
+                  // calendarIcon={null}
                 />
               )}
             </Field>

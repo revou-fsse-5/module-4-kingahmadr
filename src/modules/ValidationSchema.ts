@@ -13,7 +13,16 @@ const LoginValidationScheme = Yup.object().shape({
 const RegisterValidationForm = Yup.object().shape({
   fullname: Yup.string().required("Fullname is Required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
-  dateOfBirth: Yup.string().required("Date of Birth is Required"),
+  // dateOfBirth: Yup.string().required("Date of Birth is Required"),
+  dateOfBirth: Yup.date()
+    .required("Date of Birth is required")
+    .max(new Date(), "Date of Birth cannot be in the future")
+    .test("is-valid-age", "You must be at least 18 years old", (value) => {
+      const today = new Date();
+      const age =
+        today.getFullYear() - (value?.getFullYear() || today.getFullYear());
+      return age >= 18;
+    }),
   address: Yup.object({
     street: Yup.string().required("Street is required"),
     city: Yup.string().required("City is required"),

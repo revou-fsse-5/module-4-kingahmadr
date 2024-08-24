@@ -1,5 +1,5 @@
 import { Field, ErrorMessage } from "formik";
-import DatePickerField from "./DatePickerField";
+// import DatePickerField from "./DatePickerField";
 
 const PersonalRegistrationForms = () => {
   return (
@@ -52,10 +52,12 @@ const PersonalRegistrationForms = () => {
         </label>
 
         <Field
+          className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           id="dateOfBirth"
           name="dateOfBirth"
           label="Date Of Birth"
-          component={DatePickerField}
+          type="date"
+          component="input"
         />
 
         <ErrorMessage

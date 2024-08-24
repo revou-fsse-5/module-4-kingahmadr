@@ -83,7 +83,7 @@ const useFetchData = () => {
       if (!response.ok) {
         // throw new Error(`Error adding user data: ${response.statusText}`);
         alert(`Error adding user data multistep: ${response.statusText}`);
-        navigate("/register");
+        navigate("/multistepform");
         return;
       }
       const responseData = await response.json();

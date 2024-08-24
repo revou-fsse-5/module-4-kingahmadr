@@ -32,10 +32,11 @@ export interface MultiStepRegistrationProps {
   fullname: string;
   email: string;
   dateOfBirth: string;
-  street: string;
-  city: string;
-  state: string;
-  zipCode: number;
+  // street: string;
+  // city: string;
+  // state: string;
+  // zipCode: number;
+  address: AddressProps;
   id?: number;
   username: string;
   password: string;

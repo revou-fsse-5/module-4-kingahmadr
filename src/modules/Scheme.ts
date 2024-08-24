@@ -23,9 +23,11 @@ export const StepOneSchema = Yup.object().shape({
 });
 
 export const StepTwoSchema = Yup.object().shape({
-  street: Yup.string().required("Address is reqiured"),
-  city: Yup.string().required("City is reqiured"),
-  zipCode: Yup.number().required("Address is reqiured"),
+  address: Yup.object().shape({
+    street: Yup.string().required("Address is reqiured"),
+    city: Yup.string().required("City is reqiured"),
+    zipCode: Yup.number().required("Address is reqiured"),
+  }),
 });
 
 export const StepThreeSchema = Yup.object().shape({

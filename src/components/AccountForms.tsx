@@ -1,7 +1,38 @@
 import React from "react";
-import { Field, ErrorMessage } from "formik";
+// import { Field, ErrorMessage } from "formik";
+import tailwindStyles from "../scripts/constants/styles";
 
-const AccountInformationForms: React.FC = () => {
+interface AccountProps {
+  values: {
+    username: string;
+    password: string;
+    confirmPassword: string;
+  };
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  errors: {
+    AccountInformationForm?: {
+      username?: string;
+      password?: string;
+      confirmPassword?: string;
+    };
+  };
+  touched: {
+    AccountInformationForm?: {
+      username?: boolean;
+      password?: boolean;
+      confirmPassword?: boolean;
+    };
+  };
+}
+
+const AccountInformationForms = ({
+  values,
+  onChange,
+  onBlur,
+  errors,
+  touched,
+}: AccountProps) => {
   return (
     <section className="space-y-6 p-5 mx-auto max-w-md">
       <h3 className="absolute left-5 top-5 text-xl">Account Information</h3>
@@ -12,17 +43,26 @@ const AccountInformationForms: React.FC = () => {
         >
           Username
         </label>
-        <Field
-          id="username"
-          name="username"
+        <input
           type="text"
-          className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          name="AccountInformationForm.username"
+          id="username"
+          value={values.username}
+          onChange={onChange}
+          onBlur={onBlur}
+          className={`${tailwindStyles.input} ${
+            errors.AccountInformationForm?.username &&
+            touched.AccountInformationForm?.username
+              ? "text-pink-600 border-pink-500"
+              : ""
+          }`}
         />
-        <ErrorMessage
-          name="username"
-          component="div"
-          className="text-red-500 text-sm mt-1"
-        />
+        {errors.AccountInformationForm?.username &&
+        touched.AccountInformationForm?.username ? (
+          <div className={tailwindStyles.errorText}>
+            {errors.AccountInformationForm.username}
+          </div>
+        ) : null}
       </div>
       <div>
         <label
@@ -31,17 +71,26 @@ const AccountInformationForms: React.FC = () => {
         >
           Password
         </label>
-        <Field
+        <input
+          type="text"
+          name="AccountInformationForm.password"
           id="password"
-          name="password"
-          type="password"
-          className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          value={values.password}
+          onChange={onChange}
+          onBlur={onBlur}
+          className={`${tailwindStyles.input} ${
+            errors.AccountInformationForm?.password &&
+            touched.AccountInformationForm?.password
+              ? "text-pink-600 border-pink-500"
+              : ""
+          }`}
         />
-        <ErrorMessage
-          name="password"
-          component="div"
-          className="text-red-500 text-sm mt-1"
-        />
+        {errors.AccountInformationForm?.password &&
+        touched.AccountInformationForm?.password ? (
+          <div className={tailwindStyles.errorText}>
+            {errors.AccountInformationForm.password}
+          </div>
+        ) : null}
       </div>
       <div>
         <label
@@ -50,18 +99,26 @@ const AccountInformationForms: React.FC = () => {
         >
           Confirm Password
         </label>
-        <Field
+        <input
+          type="text"
+          name="AccountInformationForm.confirmPassword"
           id="confirmPassword"
-          name="confirmPassword"
-          type="password"
-          className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          value={values.confirmPassword}
+          onChange={onChange}
+          onBlur={onBlur}
+          className={`${tailwindStyles.input} ${
+            errors.AccountInformationForm?.confirmPassword &&
+            touched.AccountInformationForm?.confirmPassword
+              ? "text-pink-600 border-pink-500"
+              : ""
+          }`}
         />
-
-        <ErrorMessage
-          name="confirmPassword"
-          component="div"
-          className="text-red-500 text-sm mt-1"
-        />
+        {errors.AccountInformationForm?.confirmPassword &&
+        touched.AccountInformationForm?.confirmPassword ? (
+          <div className={tailwindStyles.errorText}>
+            {errors.AccountInformationForm.confirmPassword}
+          </div>
+        ) : null}
       </div>
     </section>
   );

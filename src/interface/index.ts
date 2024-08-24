@@ -17,6 +17,12 @@ interface AddressProps {
   state: string;
   zipCode: number;
 }
+interface AddressMultiStepProps {
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
+}
 export interface RegisterFormProps {
   fullname: string;
   email: string;
@@ -26,6 +32,26 @@ export interface RegisterFormProps {
   username: string;
   password: string;
   confirmPassword?: string;
+}
+
+export interface MultiStepFormProps {
+  PersonalInformationForm: {
+    fullName: string;
+    dateOfBirth: string;
+    email: string;
+  };
+  AddressInformationForm: {
+    // address: AddressMultiStepProps;
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+  };
+  AccountInformationForm: {
+    username: string;
+    password: string;
+    confirmPassword: string;
+  };
 }
 
 export interface LoginProps {

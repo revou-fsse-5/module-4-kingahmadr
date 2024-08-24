@@ -4,6 +4,7 @@ import StepIndicator from "../components/StepIndicator";
 import SwitchCaseStep from "../components/SwitchCaseStep";
 import { StepOneSchema, StepTwoSchema, StepThreeSchema } from "./Scheme";
 import { useFetchData } from "./UseFetchData";
+import { MultiStepRegistrationProps } from "../interface";
 
 const MultiStepForm: React.FC = () => {
   const { addUsersMultiStep } = useFetchData();
@@ -13,9 +14,10 @@ const MultiStepForm: React.FC = () => {
     fullname: "",
     username: "",
     email: "",
-    streetAddress: "",
+    street: "",
+    state: "",
     city: "",
-    dateOfBirth: null,
+    dateOfBirth: "",
     password: "",
     zipCode: 0,
   };
@@ -31,20 +33,24 @@ const MultiStepForm: React.FC = () => {
     console.log(step);
   };
 
-  const handleSubmit = (values: typeof initialValues) => {
-    // Submit final form values
-    alert(
-      `Register Successful!\n\n
-      Fullname: ${values.fullname}\n
-      Email: ${values.email}\n
-      Date of Birth: ${values.dateOfBirth}\n
-      Street Address: ${values.streetAddress}\n
-      City: ${values.city}\n
-      Zip Code: ${values.zipCode}\n
-      Username: ${values.username}\n
-      Password: ${values.password}`
-    );
-    console.log(values);
+  // const handleSubmit = (values: typeof initialValues) => {
+  //   // Submit final form values
+  //   alert(
+  //     `Register Successful!\n\n
+  //     Fullname: ${values.fullname}\n
+  //     Email: ${values.email}\n
+  //     Date of Birth: ${values.dateOfBirth}\n
+  //     Street Address: ${values.streetAddress}\n
+  //     City: ${values.city}\n
+  //     Zip Code: ${values.zipCode}\n
+  //     Username: ${values.username}\n
+  //     Password: ${values.password}`
+  //   );
+  //   console.log(values);
+  // };
+  const handleSubmit = (values: MultiStepRegistrationProps) => {
+    addUsersMultiStep(values);
+    // console.log("data values", values);
   };
 
   return (
@@ -54,7 +60,7 @@ const MultiStepForm: React.FC = () => {
       onSubmit={(values) => {
         const { confirmPassword, ...dataToSubmit } = values;
         if (step === validationSchema.length) {
-          handleSubmit(values);
+          handleSubmit(dataToSubmit);
         } else {
           handleNext();
         }

@@ -99,7 +99,7 @@ const useFetchData = () => {
       }
       const responseData = await response.json();
       setData((prevData) => [...prevData, responseData]);
-      navigate("/catagories");
+      navigate(0);
     } catch (error) {
       alert(`Error posting data: ${error}`);
       console.log(error);

@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { CategoriesProps, LoginProps, RegisterFormProps } from "../interface";
+import {
+  CategoriesProps,
+  LoginProps,
+  MultiStepRegistrationProps,
+  RegisterFormProps,
+} from "../interface";
 import { useNavigate } from "react-router-dom";
 import { useDataContext } from "../context/UseDataContext";
 
@@ -65,7 +70,7 @@ const useFetchData = () => {
       alert(`Error adding new user: ${error}`);
     }
   };
-  const addUsersMultiStep = async (data: RegisterFormProps) => {
+  const addUsersMultiStep = async (data: MultiStepRegistrationProps) => {
     const bodyData = JSON.stringify(data);
     try {
       const response = await fetch(`${API_URL}/users`, {

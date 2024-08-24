@@ -52,6 +52,7 @@ const MultiStepForm: React.FC = () => {
       initialValues={initialValues}
       validationSchema={validationSchema[step - 1]}
       onSubmit={(values) => {
+        const { confirmPassword, ...dataToSubmit } = values;
         if (step === validationSchema.length) {
           handleSubmit(values);
         } else {

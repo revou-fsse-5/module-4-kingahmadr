@@ -28,6 +28,20 @@ export interface RegisterFormProps {
   confirmPassword?: string;
 }
 
+export interface MultiStepRegistrationProps {
+  fullname: string;
+  email: string;
+  dateOfBirth: string;
+  street: string;
+  city: string;
+  state: string;
+  zipCode: number;
+  id?: number;
+  username: string;
+  password: string;
+  confirmPassword?: string;
+}
+
 export interface LoginProps {
   username: string;
   email: string;
